@@ -1,20 +1,18 @@
-[project]
+[tool.poetry]
 name = "finance_ml"
 version = "0.1.0"
 description = "Very good package"
-authors = [
-    {name = "Hugo ROCHA",email = "hugosrochamo@gmail.com"}
-]
+authors = ["Hugo ROCHA <hugosrochamo@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = [
-    "numpy (>=2.3.3,<3.0.0)",
-    "pandas (>=2.3.2,<3.0.0)",
-    "pytest (>=8.4.2,<9.0.0)"
-]
+packages = [{ include = "finance_ml", from = "src" }]
 
-[tool.poetry]
-packages = [{include = "finance_ml", from = "src"}]
+[tool.poetry.dependencies]
+python = ">=3.13"
+numpy = ">=2.3.3,<3.0.0"
+pandas = ">=2.3.2,<3.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.4.2,<9.0.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
