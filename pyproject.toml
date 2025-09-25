@@ -1,7 +1,7 @@
 [project]
 name = "finance_ml"
 version = "0.1.0"
-description = ""
+description = "Very good package"
 authors = [
     {name = "Hugo ROCHA",email = "hugosrochamo@gmail.com"}
 ]
