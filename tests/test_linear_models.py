@@ -5,7 +5,7 @@ import pytest
 def test_linear_regression():
     X = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])
     y = np.array([3, 5, 7, 9])
-    model1 = LinearRegression(use_intercept=True)
+    model1 = LinearRegression(use_intercept=True, coef=None)
     model1.fit(X, y)
     preds1 = model1.predict(X)
     # Expect slope ≈ 2, intercept ≈ 0
