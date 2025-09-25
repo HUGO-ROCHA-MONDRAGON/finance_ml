@@ -7,9 +7,10 @@ readme = "README.md"
 packages = [{ include = "finance_ml", from = "src" }]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.13"
+python = ">=3.11,<3.14"
 numpy = ">=2.3.3,<3.0.0"
 pandas = ">=2.3.2,<3.0.0"
+
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=8.4.2,<9.0.0"
