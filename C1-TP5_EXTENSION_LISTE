@@ -1,0 +1,114 @@
+class Liste:
+    def __init__(self):
+        self._elements = {}
+        self._count = 0
+
+    def append(self, element):
+        self._elements[self._count] = element
+        self._count += 1
+
+    def remove(self, valeur):
+        for index, element in list(self._elements.items()):
+            if element == valeur:
+                del self._elements[index]
+                self._count -= 1
+                # Décaler les éléments
+                for i in range(index, self._count):
+                    self._elements[i] = self._elements.pop(i + 1)
+                break
+
+    def pop(self, index):
+        if index < 0 or index >= self._count:
+            raise IndexError("Index hors limites")
+        element = self._elements.pop(index)
+        self._count -= 1
+        # Décaler les éléments
+        for i in range(index, self._count):
+            self._elements[i] = self._elements.pop(i + 1)
+        return element
+
+    def get_index(self, valeur):
+        for index, element in self._elements.items():
+            if element == valeur:
+                return index
+        return -1
+
+    # ---------- DUNDER METHODS ----------
+    def __str__(self):
+        """Affichage lisible"""
+        return str([self._elements[i] for i in range(self._count)])
+
+    def __len__(self):
+        """Taille de la liste"""
+        return self._count
+
+    def __getitem__(self, index):
+        """Accès par index"""
+        if index < 0 or index >= self._count:
+            raise IndexError("Index hors limites")
+        return self._elements[index]
+
+    def __setitem__(self, index, valeur):
+        """Modification par index"""
+        if index < 0 or index >= self._count:
+            raise IndexError("Index hors limites")
+        self._elements[index] = valeur
+
+    def __iter__(self):
+        """Itération sur la liste"""
+        for i in range(self._count):
+            yield self._elements[i]
+
+    def __add__(self, other):
+        """Concaténation de deux listes"""
+        if not isinstance(other, Liste):
+            raise TypeError("On ne peut additionner qu'avec une autre Liste")
+        new_list = Liste()
+        for i in range(self._count):
+            new_list.append(self._elements[i])
+        for i in range(other._count):
+            new_list.append(other._elements[i])
+        return new_list
+
+
+import unittest
+
+class TestListeDunder(unittest.TestCase):
+    def setUp(self):
+        self.liste = Liste()
+        self.liste.append(1)
+        self.liste.append(2)
+        self.liste.append(3)
+
+    def test_str(self):
+        self.assertEqual(str(self.liste), "[1, 2, 3]")
+
+    def test_len(self):
+        self.assertEqual(len(self.liste), 3)
+
+    def test_getitem(self):
+        self.assertEqual(self.liste[1], 2)
+        with self.assertRaises(IndexError):
+            _ = self.liste[3]
+
+    def test_setitem(self):
+        self.liste[1] = 5
+        self.assertEqual(self.liste[1], 5)
+        with self.assertRaises(IndexError):
+            self.liste[3] = 4
+
+    def test_iter(self):
+        self.assertEqual(list(self.liste), [1, 2, 3])
+
+    def test_add(self):
+        other = Liste()
+        other.append(4)
+        other.append(5)
+        result = self.liste + other
+        self.assertEqual(str(result), "[1, 2, 3, 4, 5]")
+
+def run_tests():
+    unittest.main(argv=[''], verbosity=2, exit=False)
+
+if __name__ == '__main__':
+    run_tests()
