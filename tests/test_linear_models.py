@@ -14,7 +14,7 @@ def test_linear_regression():
     assert np.allclose(preds1, y, atol=1e-6)
 
     # Case 2: Without intercept
-    model2 = LinearRegression(use_intercept=False)
+    model2 = LinearRegression(use_intercept=False, coef=None)
     model2.fit(X, y)
     preds2 = model2.predict(X)
     # Expect slope ≈ 2 (since intercept is forced to 0)
